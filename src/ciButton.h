@@ -28,8 +28,8 @@ public:
 	ciButton();
 
 	void mouseMoved(ci::app::MouseEvent & mouse);
+    void mousePressed(ci::app::MouseEvent & mouse);
 	void mouseDragged(ci::app::MouseEvent & mouse);
-	void mousePressed(ci::app::MouseEvent & mouse);
 	void mouseReleased(ci::app::MouseEvent & mouse);
 
 #ifdef CINDER_COCOA_TOUCH
@@ -40,7 +40,7 @@ protected:
 
 	//
 
-};//class ciScrollView
+};//class ciButton
 
 }//namespace coc
 

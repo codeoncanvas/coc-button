@@ -1,5 +1,5 @@
 //
-//  ScrollView.h
+//  cocButton.h
 //  Created by Lukasz Karluk on 2/06/2014.
 //  http://codeoncanvas.cc
 //
@@ -11,6 +11,8 @@
 namespace coc {
 
 class Button {
+
+public:
 
     Button();
     ~Button();
