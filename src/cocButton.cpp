@@ -12,6 +12,7 @@ Button::Button(coc::Rect rect) {
 
     setRect(rect);
     bUseHandlers = false;
+    bUpdateAsync = false;
 
     bOver = coc::Value<bool>(false); // init with default value.
     bDown = coc::Value<bool>(false); // init with default value.
@@ -116,12 +117,20 @@ bool Button::releasedOutside() {
 //--------------------------------------------------------------
 void Button::pointMoved(int x, int y) {
     bOver = rect.isInside(x, y);
+    
+    if(bUpdateAsync) {
+        update();
+    }
 }
 
 void Button::pointPressed(int x, int y) {
     bOver = rect.isInside(x, y);
     if(bOver == true) {
         bDown = true;
+    }
+    
+    if(bUpdateAsync) {
+        update();
     }
 }
 
@@ -130,11 +139,19 @@ void Button::pointDragged(int x, int y) {
     if(bOver == false) {
         bDown = false;
     }
+    
+    if(bUpdateAsync) {
+        update();
+    }
 }
 
 void Button::pointReleased(int x, int y) {
     bOver = rect.isInside(x, y);
     bDown = false;
+    
+    if(bUpdateAsync) {
+        update();
+    }
 }
 
 //--------------------------------------------------------------

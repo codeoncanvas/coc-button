@@ -53,6 +53,7 @@ protected:
 
     coc::Rect rect;
     bool bUseHandlers;
+    bool bUpdateAsync;
     
     coc::Value<bool> bOver;
     coc::Value<bool> bDown;

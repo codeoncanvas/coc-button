@@ -21,27 +21,58 @@ using namespace std;
 
 namespace coc {
 
-ciButton::ciButton() {
-
+//--------------------------------------------------------------
+ciButton::ciButton() : coc::Button() {
+    bUseHandlers = true;
+    bUpdateAsync = true;
 }
 
+//--------------------------------------------------------------
 void ciButton::mouseMoved(ci::app::MouseEvent & mouse) {
-
+    coc::Button::pointMoved(mouse.getX(), mouse.getY());
 }
 
 void ciButton::mousePressed(ci::app::MouseEvent & mouse) {
-    
+    coc::Button::pointPressed(mouse.getX(), mouse.getY());
 }
 
 void ciButton::mouseDragged(ci::app::MouseEvent & mouse) {
-
+    coc::Button::pointDragged(mouse.getX(), mouse.getY());
 }
 
-void ciButtonmouseReleased(ci::app::MouseEvent & mouse) {
-
+void ciButton::mouseReleased(ci::app::MouseEvent & mouse) {
+    coc::Button::pointReleased(mouse.getX(), mouse.getY());
 }
 
+//--------------------------------------------------------------
+void ciButton::handleMovedInside() {
+    //
+}
 
-}//namespace coc
+void ciButton::handleMovedOutside() {
+    //
+}
+
+void ciButton::handlePressedInside() {
+    //
+}
+
+void ciButton::handleDraggedInside() {
+    //
+}
+
+void ciButton::handleDraggedOutside() {
+    //
+}
+
+void ciButton::handleReleasedInside() {
+    //
+}
+
+void ciButton::handleReleasedOutside() {
+    //
+}
+
+}
 
 #endif

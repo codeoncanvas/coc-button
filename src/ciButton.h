@@ -25,24 +25,23 @@ class ciButton : public coc::Button {
 
 public:
 
-	ciButton();
+    ciButton();
 
-	void mouseMoved(ci::app::MouseEvent & mouse);
+    void mouseMoved(ci::app::MouseEvent & mouse);
     void mousePressed(ci::app::MouseEvent & mouse);
-	void mouseDragged(ci::app::MouseEvent & mouse);
-	void mouseReleased(ci::app::MouseEvent & mouse);
+    void mouseDragged(ci::app::MouseEvent & mouse);
+    void mouseReleased(ci::app::MouseEvent & mouse);
+    
+    void handleMovedInside();
+    void handleMovedOutside();
+    void handlePressedInside();
+    void handleDraggedInside();
+    void handleDraggedOutside();
+    void handleReleasedInside();
+    void handleReleasedOutside();
+};
 
-#ifdef CINDER_COCOA_TOUCH
-	//todo: touch events
-#endif
-
-protected:
-
-	//
-
-};//class ciButton
-
-}//namespace coc
+}
 
 #endif
 
