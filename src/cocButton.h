@@ -21,6 +21,8 @@ public:
     void setRect(coc::Rect rect);
     void setRect(float x, float y, float w, float h);
     const coc::Rect & getRect() const;
+    
+    void setEnabled(bool value);
     void setUseHandlers(bool value);
     void setUpdateAsync(bool value);
     void setRegisterEvents(bool value);
@@ -56,6 +58,7 @@ public:
 protected:
 
     coc::Rect rect;
+    bool bEnabled;
     bool bUseHandlers;
     bool bUpdateAsync;
     bool bRegisterEvents;

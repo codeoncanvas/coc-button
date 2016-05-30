@@ -11,6 +11,7 @@ namespace coc {
 Button::Button(coc::Rect rectNew) {
 
     rect = rectNew;
+    bEnabled = true;
     bUseHandlers = false;
     bUpdateAsync = false;
     bRegisterEvents = false;
@@ -39,6 +40,11 @@ void Button::setRect(float x, float y, float w, float h) {
 
 const coc::Rect & Button::getRect() const {
     return rect;
+}
+
+//--------------------------------------------------------------
+void Button::setEnabled(bool value) {
+    bEnabled = value;
 }
 
 void Button::setUseHandlers(bool value) {
@@ -135,6 +141,10 @@ bool Button::releasedOutside() {
 
 //--------------------------------------------------------------
 void Button::pointMoved(int x, int y) {
+    if(bEnabled == false) {
+        return;
+    }
+
     bOver = rect.isInside(x, y);
     
     if(bUpdateAsync) {
@@ -143,6 +153,10 @@ void Button::pointMoved(int x, int y) {
 }
 
 void Button::pointPressed(int x, int y) {
+    if(bEnabled == false) {
+        return;
+    }
+
     bOver = rect.isInside(x, y);
     if(bOver == true) {
         bDown = true;
@@ -154,6 +168,10 @@ void Button::pointPressed(int x, int y) {
 }
 
 void Button::pointDragged(int x, int y) {
+    if(bEnabled == false) {
+        return;
+    }
+
     bOver = rect.isInside(x, y);
     if(bOver == false) {
         bDown = false;
@@ -165,6 +183,10 @@ void Button::pointDragged(int x, int y) {
 }
 
 void Button::pointReleased(int x, int y) {
+    if(bEnabled == false) {
+        return;
+    }
+
     bOver = rect.isInside(x, y);
     bDown = false;
     
