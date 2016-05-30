@@ -22,9 +22,10 @@ using namespace std;
 namespace coc {
 
 //--------------------------------------------------------------
-ciButton::ciButton() : coc::Button() {
-    bUseHandlers = true;
-    bUpdateAsync = true;
+ciButton::ciButton(coc::Rect rect) : coc::Button(rect) {
+    setUseHandlers(true);
+    setUpdateAsync(false);
+    setRegisterEvents(true);
 }
 
 //--------------------------------------------------------------
@@ -46,31 +47,35 @@ void ciButton::mouseReleased(ci::app::MouseEvent & mouse) {
 
 //--------------------------------------------------------------
 void ciButton::handleMovedInside() {
-    //
+    // TODO: add signal.
 }
 
 void ciButton::handleMovedOutside() {
-    //
+    // TODO: add signal.
 }
 
 void ciButton::handlePressedInside() {
-    //
-}
-
-void ciButton::handleDraggedInside() {
-    //
+    // TODO: add signal.
 }
 
 void ciButton::handleDraggedOutside() {
-    //
+    // TODO: add signal.
 }
 
 void ciButton::handleReleasedInside() {
-    //
+    // TODO: add signal.
 }
 
 void ciButton::handleReleasedOutside() {
-    //
+    // TODO: add signal.
+}
+
+void ciButton::handleEventRegister() {
+    // TODO: hook up to cinder events.
+}
+
+void ciButton::handleEventUnregister() {
+    // TODO: unhook from cinder events.
 }
 
 }

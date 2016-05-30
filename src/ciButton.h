@@ -25,20 +25,22 @@ class ciButton : public coc::Button {
 
 public:
 
-    ciButton();
-
+    ciButton(coc::Rect rect = coc::Rect());
+    
     void mouseMoved(ci::app::MouseEvent & mouse);
     void mousePressed(ci::app::MouseEvent & mouse);
     void mouseDragged(ci::app::MouseEvent & mouse);
     void mouseReleased(ci::app::MouseEvent & mouse);
     
-    void handleMovedInside();
-    void handleMovedOutside();
-    void handlePressedInside();
-    void handleDraggedInside();
-    void handleDraggedOutside();
-    void handleReleasedInside();
-    void handleReleasedOutside();
+    virtual void handleMovedInside();
+    virtual void handleMovedOutside();
+    virtual void handlePressedInside();
+    virtual void handleDraggedOutside();
+    virtual void handleReleasedInside();
+    virtual void handleReleasedOutside();
+    virtual void handleEventRegister();
+    virtual void handleEventUnregister();
+    
 };
 
 }

@@ -8,18 +8,19 @@
 
 namespace coc {
 
-Button::Button(coc::Rect rect) {
+Button::Button(coc::Rect rectNew) {
 
-    setRect(rect);
+    rect = rectNew;
     bUseHandlers = false;
     bUpdateAsync = false;
+    bRegisterEvents = false;
 
     bOver = coc::Value<bool>(false); // init with default value.
     bDown = coc::Value<bool>(false); // init with default value.
 }
 
 Button::~Button() {
-    //
+    setRegisterEvents(false); // unregister events on destructor.
 }
 
 //--------------------------------------------------------------
@@ -34,6 +35,27 @@ void Button::setRect(float x, float y, float w, float h) {
     r.setW(w);
     r.setH(h);
     setRect(r);
+}
+
+void Button::setUseHandlers(bool value) {
+    bUseHandlers = value;
+}
+
+void Button::setUpdateAsync(bool value) {
+    bUpdateAsync = value;
+}
+
+void Button::setRegisterEvents(bool value) {
+    if(bRegisterEvents == value) {
+        return;
+    }
+
+    bRegisterEvents = value;
+    if(bRegisterEvents == true) {
+        handleEventRegister();
+    } else {
+        handleEventUnregister();
+    }
 }
 
 //--------------------------------------------------------------
@@ -54,9 +76,6 @@ void Button::update() {
     }
     if(pressedInside()) {
         handlePressedInside();
-    }
-    if(draggedInside()) {
-        handleDraggedInside();
     }
     if(draggedOutside()) {
         handleDraggedOutside();
@@ -96,10 +115,6 @@ bool Button::movedOutside() {
 
 bool Button::pressedInside() {
     return (down() && downChanged());
-}
-
-bool Button::draggedInside() {
-    return (!down() && over() && overChanged());
 }
 
 bool Button::draggedOutside() {
@@ -152,35 +167,6 @@ void Button::pointReleased(int x, int y) {
     if(bUpdateAsync) {
         update();
     }
-}
-
-//--------------------------------------------------------------
-void Button::handleMovedInside() {
-    // override.
-}
-
-void Button::handleMovedOutside() {
-    // override.
-}
-
-void Button::handlePressedInside() {
-    // override.
-}
-
-void Button::handleDraggedInside() {
-    // override.
-}
-
-void Button::handleDraggedOutside() {
-    // override.
-}
-
-void Button::handleReleasedInside() {
-    // override.
-}
-
-void Button::handleReleasedOutside() {
-    // override.
 }
 
 }

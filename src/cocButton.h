@@ -20,6 +20,9 @@ public:
     
     void setRect(coc::Rect rect);
     void setRect(float x, float y, float w, float h);
+    void setUseHandlers(bool value);
+    void setUpdateAsync(bool value);
+    void setRegisterEvents(bool value);
     
     void update();
     
@@ -31,7 +34,6 @@ public:
     bool movedInside();
     bool movedOutside();
     bool pressedInside();
-    bool draggedInside();
     bool draggedOutside();
     bool releasedInside();
     bool releasedOutside();
@@ -40,20 +42,22 @@ public:
     void pointPressed(int x, int y);
 	void pointDragged(int x, int y);
 	void pointReleased(int x, int y);
-    
-    virtual void handleMovedInside();
-    virtual void handleMovedOutside();
-    virtual void handlePressedInside();
-    virtual void handleDraggedInside();
-    virtual void handleDraggedOutside();
-    virtual void handleReleasedInside();
-    virtual void handleReleasedOutside();
+
+    virtual void handleMovedInside(){};
+    virtual void handleMovedOutside(){};
+    virtual void handlePressedInside(){};
+    virtual void handleDraggedOutside(){};
+    virtual void handleReleasedInside(){};
+    virtual void handleReleasedOutside(){};
+    virtual void handleEventRegister(){};
+    virtual void handleEventUnregister(){};
     
 protected:
 
     coc::Rect rect;
     bool bUseHandlers;
     bool bUpdateAsync;
+    bool bRegisterEvents;
     
     coc::Value<bool> bOver;
     coc::Value<bool> bDown;
