@@ -20,6 +20,7 @@ public:
     
     void setRect(coc::Rect rect);
     void setRect(float x, float y, float w, float h);
+    const coc::Rect & getRect() const;
     void setUseHandlers(bool value);
     void setUpdateAsync(bool value);
     void setRegisterEvents(bool value);

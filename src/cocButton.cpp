@@ -37,6 +37,10 @@ void Button::setRect(float x, float y, float w, float h) {
     setRect(r);
 }
 
+const coc::Rect & Button::getRect() const {
+    return rect;
+}
+
 void Button::setUseHandlers(bool value) {
     bUseHandlers = value;
 }
