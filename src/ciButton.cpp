@@ -47,35 +47,41 @@ void ciButton::mouseReleased(ci::app::MouseEvent & mouse) {
 
 //--------------------------------------------------------------
 void ciButton::handleMovedInside() {
-    // TODO: add signal.
+    signalOnMovedInside.emit();
 }
 
 void ciButton::handleMovedOutside() {
-    // TODO: add signal.
+    signalOnMovedOutside.emit();
 }
 
 void ciButton::handlePressedInside() {
-    // TODO: add signal.
+    signalOnPressedInside.emit();
 }
 
 void ciButton::handleDraggedOutside() {
-    // TODO: add signal.
+    signalOnDraggedOutside.emit();
 }
 
 void ciButton::handleReleasedInside() {
-    // TODO: add signal.
+    signalOnReleasedInside.emit();
 }
 
 void ciButton::handleReleasedOutside() {
-    // TODO: add signal.
+    signalOnReleasedOutside.emit();
 }
 
 void ciButton::handleEventRegister() {
-    // TODO: hook up to cinder events.
+    cbMouseDown = getWindow()->getSignalMouseDown().connect( std::bind( &ciButton::mousePressed, this, std::placeholders::_1 ) );
+    cbMouseDrag = getWindow()->getSignalMouseDrag().connect( std::bind( &ciButton::mouseDragged, this, std::placeholders::_1 ) );
+    cbMouseUp   = getWindow()->getSignalMouseUp().connect( std::bind( &ciButton::mouseReleased, this, std::placeholders::_1 ) );
+    cbMouseMove = getWindow()->getSignalMouseMove().connect( std::bind( &ciButton::mouseMoved, this, std::placeholders::_1 ) );
 }
 
 void ciButton::handleEventUnregister() {
-    // TODO: unhook from cinder events.
+    cbMouseDown.disconnect();
+    cbMouseDrag.disconnect();
+    cbMouseUp.disconnect();
+    cbMouseMove.disconnect();
 }
 
 }

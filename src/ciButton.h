@@ -38,13 +38,30 @@ public:
     virtual void handleDraggedOutside();
     virtual void handleReleasedInside();
     virtual void handleReleasedOutside();
+
     virtual void handleEventRegister();
     virtual void handleEventUnregister();
-    
+
+	ci::signals::Signal<void()>& getSignalOnMovedInside() 	{ return signalOnMovedInside; }
+	ci::signals::Signal<void()>& getSignalOnMovedOutside() 	{ return signalOnMovedOutside; }
+	ci::signals::Signal<void()>& getSignalOnPressedInside() { return signalOnPressedInside; }
+	ci::signals::Signal<void()>& getSignalOnDraggedOutside(){ return signalOnDraggedOutside; }
+	ci::signals::Signal<void()>& getSignalOnReleasedInside(){ return signalOnReleasedInside; }
+	ci::signals::Signal<void()>& getSignalOnReleasedOutside(){return signalOnReleasedOutside; }
+
+private:
+
+	ci::signals::Signal<void()>  signalOnMovedInside;
+	ci::signals::Signal<void()>  signalOnMovedOutside;
+	ci::signals::Signal<void()>  signalOnPressedInside;
+	ci::signals::Signal<void()>  signalOnDraggedOutside;
+	ci::signals::Signal<void()>  signalOnReleasedInside;
+	ci::signals::Signal<void()>  signalOnReleasedOutside;
+
+	ci::signals::ScopedConnection  cbMouseDown, cbMouseDrag, cbMouseUp, cbMouseMove;
+
 };
 
 }
 
 #endif
-
-
