@@ -32,7 +32,7 @@ public:
     void mouseDragged(ci::app::MouseEvent & mouse);
     void mouseReleased(ci::app::MouseEvent & mouse);
 
-	virtual void draw() override;
+	virtual void draw();
     
     virtual void handleMovedInside();
     virtual void handleMovedOutside();

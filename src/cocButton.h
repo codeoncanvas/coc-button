@@ -31,7 +31,6 @@ public:
 	void moveCenterTo( int x, int y);
     
     void update();
-	virtual void draw(){};
     
     bool over() const;
     bool overChanged() const;

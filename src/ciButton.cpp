@@ -28,6 +28,7 @@ ciButton::ciButton(coc::Rect rect) : coc::Button(rect) {
     setRegisterEvents(true);
 }
 
+//--------------------------------------------------------------
 void ciButton::draw() {
     gl::drawSolidRect( rect );
 }
