@@ -69,6 +69,22 @@ void Button::setRegisterEvents(bool value) {
 }
 
 //--------------------------------------------------------------
+
+
+void Button::moveTo( int x, int y )
+{
+    rect.setX(x);
+    rect.setY(y);
+}
+
+void Button::moveCenterTo( int x, int y )
+{
+    rect.setX(x - rect.getW()/2);
+    rect.setY(y - rect.getH()/2);
+}
+
+
+//--------------------------------------------------------------
 void Button::update() {
     
     bOver.update();

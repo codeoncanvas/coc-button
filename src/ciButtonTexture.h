@@ -24,8 +24,10 @@ class ciButtonTexture : public ciButton {
 public:
 
 	void setTexture( ci::gl::TextureRef _tex );
+	ci::gl::TextureRef getTexture() { return tex; }
 
 	void draw() override;
+
 
 private:
 

@@ -26,6 +26,9 @@ public:
     void setUseHandlers(bool value);
     void setUpdateAsync(bool value);
     void setRegisterEvents(bool value);
+
+	void moveTo( int x, int y);
+	void moveCenterTo( int x, int y);
     
     void update();
 	virtual void draw(){};
