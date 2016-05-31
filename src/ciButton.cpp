@@ -29,6 +29,11 @@ ciButton::ciButton(coc::Rect rect) : coc::Button(rect) {
 }
 
 //--------------------------------------------------------------
+void ciButton::draw() {
+    gl::drawSolidRect( rect );
+}
+
+//--------------------------------------------------------------
 void ciButton::mouseMoved(ci::app::MouseEvent & mouse) {
     coc::Button::pointMoved(mouse.getX(), mouse.getY());
 }
