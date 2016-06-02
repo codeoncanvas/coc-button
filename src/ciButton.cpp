@@ -25,7 +25,7 @@ namespace coc {
 ciButton::ciButton(coc::Rect rect) : coc::Button(rect) {
     setUseHandlers(true);
     setUpdateAsync(false);
-    setRegisterEvents(true);
+    setRegisterEvents(false);
 }
 
 //--------------------------------------------------------------

@@ -204,7 +204,9 @@ void Button::pointReleased(int x, int y) {
     }
 
     bOver = rect.isInside(x, y);
-    bDown = false;
+    if(bDown == true) {
+        bDown = false;
+    }
     
     if(bUpdateAsync) {
         update();
