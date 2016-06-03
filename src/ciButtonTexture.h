@@ -29,7 +29,7 @@ public:
 	void draw() override;
 
 
-private:
+protected:
 
 	ci::gl::TextureRef	tex;
 
