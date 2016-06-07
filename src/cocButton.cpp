@@ -69,20 +69,20 @@ void Button::setRegisterEvents(bool value) {
 }
 
 //--------------------------------------------------------------
-
-
-void Button::moveTo( int x, int y )
-{
+void Button::moveTo( int x, int y ) {
     rect.setX(x);
     rect.setY(y);
 }
 
-void Button::moveCenterTo( int x, int y )
-{
+void Button::moveCenterTo( int x, int y ) {
     rect.setX(x - rect.getW()/2);
     rect.setY(y - rect.getH()/2);
 }
 
+//--------------------------------------------------------------
+const glm::ivec2 & Button::getPointPosLast() {
+    return pointPos;
+}
 
 //--------------------------------------------------------------
 void Button::update() {
@@ -161,6 +161,9 @@ void Button::pointMoved(int x, int y) {
         return;
     }
 
+    pointPos.x = x;
+    pointPos.y = y;
+
     bOver = rect.isInside(x, y);
     
     if(bUpdateAsync) {
@@ -172,6 +175,9 @@ void Button::pointPressed(int x, int y) {
     if(bEnabled == false) {
         return;
     }
+    
+    pointPos.x = x;
+    pointPos.y = y;
 
     bOver = rect.isInside(x, y);
     if(bOver == true) {
@@ -188,6 +194,9 @@ void Button::pointDragged(int x, int y) {
         return;
     }
 
+    pointPos.x = x;
+    pointPos.y = y;
+
     bOver = rect.isInside(x, y);
     if(bOver == false) {
         bDown = false;
@@ -202,6 +211,9 @@ void Button::pointReleased(int x, int y) {
     if(bEnabled == false) {
         return;
     }
+    
+    pointPos.x = x;
+    pointPos.y = y;
 
     bOver = rect.isInside(x, y);
     if(bDown == true) {

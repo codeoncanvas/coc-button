@@ -30,6 +30,8 @@ public:
 	void moveTo( int x, int y);
 	void moveCenterTo( int x, int y);
     
+    const glm::ivec2 & getPointPosLast();
+    
     void update();
     
     bool over() const;
@@ -68,6 +70,7 @@ protected:
     
     coc::Value<bool> bOver;
     coc::Value<bool> bDown;
+    glm::ivec2 pointPos;
 };
 
 }
