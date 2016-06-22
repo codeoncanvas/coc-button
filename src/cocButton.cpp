@@ -1,8 +1,21 @@
-//
-//  cocButton.cpp
-//  Created by Lukasz Karluk on 2/06/2014.
-//  http://codeoncanvas.cc
-//
+/**
+ *
+ *      ┌─┐╔═╗┌┬┐┌─┐
+ *      │  ║ ║ ││├┤
+ *      └─┘╚═╝─┴┘└─┘
+ *   ┌─┐┌─┐╔╗╔┬  ┬┌─┐┌─┐
+ *   │  ├─┤║║║└┐┌┘├─┤└─┐
+ *   └─┘┴ ┴╝╚╝ └┘ ┴ ┴└─┘
+ *
+ * Copyright (c) 2014-2016 Code on Canvas Pty Ltd, http://CodeOnCanvas.cc
+ *
+ * This software is distributed under the MIT license
+ * https://tldrlegal.com/license/mit-license
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code
+ *
+ **/
 
 #include "cocButton.h"
 
@@ -86,14 +99,14 @@ const glm::ivec2 & Button::getPointPosLast() {
 
 //--------------------------------------------------------------
 void Button::update() {
-    
+
     bOver.update();
     bDown.update();
-    
+
     if(bUseHandlers == false) {
         return;
     }
-    
+
     if(movedInside()) {
         handleMovedInside();
     }
@@ -165,7 +178,7 @@ void Button::pointMoved(int x, int y) {
     pointPos.y = y;
 
     bOver = rect.isInside(x, y);
-    
+
     if(bUpdateAsync) {
         update();
     }
@@ -175,7 +188,7 @@ void Button::pointPressed(int x, int y) {
     if(bEnabled == false) {
         return;
     }
-    
+
     pointPos.x = x;
     pointPos.y = y;
 
@@ -183,7 +196,7 @@ void Button::pointPressed(int x, int y) {
     if(bOver == true) {
         bDown = true;
     }
-    
+
     if(bUpdateAsync) {
         update();
     }
@@ -201,7 +214,7 @@ void Button::pointDragged(int x, int y) {
     if(bOver == false) {
         bDown = false;
     }
-    
+
     if(bUpdateAsync) {
         update();
     }
@@ -211,7 +224,7 @@ void Button::pointReleased(int x, int y) {
     if(bEnabled == false) {
         return;
     }
-    
+
     pointPos.x = x;
     pointPos.y = y;
 
@@ -219,7 +232,7 @@ void Button::pointReleased(int x, int y) {
     if(bDown == true) {
         bDown = false;
     }
-    
+
     if(bUpdateAsync) {
         update();
     }
