@@ -16,8 +16,10 @@ Button::Button(coc::Rect rectNew) {
     bUpdateAsync = false;
     bRegisterEvents = false;
 
-    bOver = coc::Value<bool>(false); // init with default value.
-    bDown = coc::Value<bool>(false); // init with default value.
+    bOver = false;
+    bOverChanged = false;
+    bDown = false;
+    bDownChanged = false;
 }
 
 Button::~Button() {
@@ -86,10 +88,50 @@ const glm::ivec2 & Button::getPointPosLast() {
 
 //--------------------------------------------------------------
 void Button::update() {
+
+    bOverChanged = false;
+    bDownChanged = false;
+
+    //----------------------------------------------------------
+    for(int i=0; i<points.size(); i++) {
+        ButtonPoint & point = points[i];
+        
+        bool bOverNew = rect.isInside(point.pos.x, point.pos.y);
+        bOverChanged = bOver != bOverNew;
+        bOver = bOverNew;
+        
+        bool bDownNew = bDown;
+        
+        if(point.type == ButtonPoint::Type::Moved) {
+            
+            // over state already worked out above.
+        
+        } else if(point.type == ButtonPoint::Type::Pressed) {
+        
+            if(bOver == true) {
+                bDownNew = true;
+            }
+            
+        } else if(point.type == ButtonPoint::Type::Dragged) {
+        
+            if(bOver == false) {
+                bDownNew = false;
+            }
+        
+        } else if(point.type == ButtonPoint::Type::Released) {
+        
+            bDownNew = false;
+        }
+        
+        bDownChanged = bDown != bDownNew;
+        bDown = bDownNew;
+        
+        pointPos = point.pos; // save last point position.
+    }
     
-    bOver.update();
-    bDown.update();
+    points.clear();
     
+    //----------------------------------------------------------
     if(bUseHandlers == false) {
         return;
     }
@@ -119,7 +161,7 @@ bool Button::over() const {
 }
 
 bool Button::overChanged() const {
-    return bOver.hasChanged();
+    return bOverChanged;
 }
 
 bool Button::down() const {
@@ -127,7 +169,7 @@ bool Button::down() const {
 }
 
 bool Button::downChanged() const {
-    return bDown.hasChanged();
+    return bDownChanged;
 }
 
 //--------------------------------------------------------------
@@ -160,11 +202,8 @@ void Button::pointMoved(int x, int y) {
     if(bEnabled == false) {
         return;
     }
-
-    pointPos.x = x;
-    pointPos.y = y;
-
-    bOver = rect.isInside(x, y);
+    
+    pointNew(ButtonPoint::Type::Moved, x, y);
     
     if(bUpdateAsync) {
         update();
@@ -176,13 +215,7 @@ void Button::pointPressed(int x, int y) {
         return;
     }
     
-    pointPos.x = x;
-    pointPos.y = y;
-
-    bOver = rect.isInside(x, y);
-    if(bOver == true) {
-        bDown = true;
-    }
+    pointNew(ButtonPoint::Type::Pressed, x, y);
     
     if(bUpdateAsync) {
         update();
@@ -194,13 +227,7 @@ void Button::pointDragged(int x, int y) {
         return;
     }
 
-    pointPos.x = x;
-    pointPos.y = y;
-
-    bOver = rect.isInside(x, y);
-    if(bOver == false) {
-        bDown = false;
-    }
+    pointNew(ButtonPoint::Type::Dragged, x, y);
     
     if(bUpdateAsync) {
         update();
@@ -212,17 +239,18 @@ void Button::pointReleased(int x, int y) {
         return;
     }
     
-    pointPos.x = x;
-    pointPos.y = y;
-
-    bOver = rect.isInside(x, y);
-    if(bDown == true) {
-        bDown = false;
-    }
+    pointNew(ButtonPoint::Type::Released, x, y);
     
     if(bUpdateAsync) {
         update();
     }
+}
+
+void Button::pointNew(ButtonPoint::Type type, int x, int y) {
+    points.push_back(ButtonPoint());
+    ButtonPoint & point = points.back();
+    point.type = type;
+    point.pos = glm::ivec2(x, y);
 }
 
 }

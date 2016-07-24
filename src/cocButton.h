@@ -11,6 +11,20 @@
 namespace coc {
 
 //--------------------------------------------------------------
+struct ButtonPoint {
+
+    enum Type {
+        Moved = 0,
+        Pressed,
+        Dragged,
+        Released
+    };
+
+    Type type;
+    glm::ivec2 pos;
+};
+
+//--------------------------------------------------------------
 class Button {
 
 public:
@@ -50,6 +64,7 @@ public:
     void pointPressed(int x, int y);
 	void pointDragged(int x, int y);
 	void pointReleased(int x, int y);
+    void pointNew(ButtonPoint::Type type, int x, int y);
 
     virtual void handleMovedInside(){};
     virtual void handleMovedOutside(){};
@@ -68,9 +83,12 @@ protected:
     bool bUpdateAsync;
     bool bRegisterEvents;
     
-    coc::Value<bool> bOver;
-    coc::Value<bool> bDown;
     glm::ivec2 pointPos;
+    std::vector<ButtonPoint> points;
+    bool bOver;
+    bool bOverChanged;
+    bool bDown;
+    bool bDownChanged;
 };
 
 }
