@@ -111,7 +111,9 @@ void Button::update() {
         
         bool bOverNew = rect.isInside(point.pos.x, point.pos.y);
         bOverChanged = bOver != bOverNew;
-        bOver = bOverNew;
+        if(bOverChanged) {
+            bOver = bOverNew;
+        }
         
         bool bDownNew = bDown;
         
@@ -137,7 +139,9 @@ void Button::update() {
         }
         
         bDownChanged = bDown != bDownNew;
-        bDown = bDownNew;
+        if(bDownChanged) {
+            bDown = bDownNew;
+        }
         
         pointPos = point.pos; // save last point position.
     }
