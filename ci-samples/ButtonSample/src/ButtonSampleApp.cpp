@@ -50,22 +50,28 @@ void ButtonSampleApp::update() {
     // below are button states which can be used to do different things.
     
     if(button.movedInside()) {
-        addButtonEvent("movedInside");
+        addButtonEvent("moved_IN");
     }
     if(button.movedOutside()) {
-        addButtonEvent("movedOutside");
+        addButtonEvent("moved_OUT");
     }
     if(button.pressedInside()) {
-        addButtonEvent("pressedInside");
+        addButtonEvent("pressed_IN");
+    }
+    if(button.pressedOutside()) {
+        addButtonEvent("pressed_OUT");
+    }
+    if(button.draggedInside()) {
+        addButtonEvent("dragged_IN");
     }
     if(button.draggedOutside()) {
-        addButtonEvent("draggedOutside");
+        addButtonEvent("dragged_OUT");
     }
     if(button.releasedInside()) {
-        addButtonEvent("releasedInside");
+        addButtonEvent("released_IN");
     }
     if(button.releasedOutside()) {
-        addButtonEvent("releasedOutside");
+        addButtonEvent("released_OUT");
     }
 }
 
@@ -126,13 +132,11 @@ void ButtonSampleApp::keyDown( KeyEvent event ) {
 
     if(event.getChar() == '1') {
         button.pointPressed(cx, cy);
-        button.pointReleased(cx, cy);
     }
     
-    if(event.getChar() == '2') {
-        button.pointPressed(cx, cy);
-        button.pointDragged(cx, cy);
-        button.pointReleased(cx, cy);
+    if(event.getChar() == '2') { // test mouse moving in/out over button on the same frame.
+        button.pointMoved(cx, cy);
+        button.pointMoved(0, 0);
     }
 }
 

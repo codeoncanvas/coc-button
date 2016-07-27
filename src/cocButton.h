@@ -69,6 +69,8 @@ public:
     bool movedInside();
     bool movedOutside();
     bool pressedInside();
+    bool pressedOutside();
+    bool draggedInside();
     bool draggedOutside();
     bool releasedInside();
     bool releasedOutside();
@@ -82,6 +84,8 @@ public:
     virtual void handleMovedInside(){};
     virtual void handleMovedOutside(){};
     virtual void handlePressedInside(){};
+    virtual void handlePressedOutside(){};
+    virtual void handleDraggedInside(){};
     virtual void handleDraggedOutside(){};
     virtual void handleReleasedInside(){};
     virtual void handleReleasedOutside(){};
@@ -106,6 +110,8 @@ protected:
     bool bMovedInside;
     bool bMovedOutside;
     bool bPressedInside;
+    bool bPressedOutside;
+    bool bDraggedInside;
     bool bDraggedOutside;
     bool bReleasedInside;
     bool bReleasedOutside;
