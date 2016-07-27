@@ -102,6 +102,13 @@ protected:
     bool bOverChanged;
     bool bDown;
     bool bDownChanged;
+    
+    bool bMovedInside;
+    bool bMovedOutside;
+    bool bPressedInside;
+    bool bDraggedOutside;
+    bool bReleasedInside;
+    bool bReleasedOutside;
 };
 
 }

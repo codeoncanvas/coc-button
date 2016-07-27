@@ -58,6 +58,9 @@ void ButtonSampleApp::update() {
     if(button.pressedInside()) {
         addButtonEvent("pressedInside");
     }
+    if(button.draggedOutside()) {
+        addButtonEvent("draggedOutside");
+    }
     if(button.releasedInside()) {
         addButtonEvent("releasedInside");
     }

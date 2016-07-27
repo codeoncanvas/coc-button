@@ -33,6 +33,13 @@ Button::Button(coc::Rect rectNew) {
     bOverChanged = false;
     bDown = false;
     bDownChanged = false;
+    
+    bMovedInside = false;
+    bMovedOutside = false;
+    bPressedInside = false;
+    bDraggedOutside = false;
+    bReleasedInside = false;
+    bReleasedOutside = false;
 }
 
 Button::~Button() {
@@ -104,43 +111,61 @@ void Button::update() {
 
     bOverChanged = false;
     bDownChanged = false;
+    
+    bMovedInside = false;
+    bMovedOutside = false;
+    bPressedInside = false;
+    bDraggedOutside = false;
+    bReleasedInside = false;
+    bReleasedOutside = false;
 
     //----------------------------------------------------------
     for(int i=0; i<points.size(); i++) {
         ButtonPoint & point = points[i];
         
         bool bOverNew = rect.isInside(point.pos.x, point.pos.y);
-        bOverChanged = bOver != bOverNew;
+        bOverChanged = (bOver != bOverNew);
         if(bOverChanged) {
             bOver = bOverNew;
         }
         
-        bool bDownNew = bDown;
-        
         if(point.type == ButtonPoint::Type::Moved) {
             
-            // over state already worked out above.
+            bMovedInside = bOver && bOverChanged && !bDown;
+            bMovedOutside = !bOver && bOverChanged && !bDown;
         
         } else if(point.type == ButtonPoint::Type::Pressed) {
         
-            if(bOver == true) {
-                bDownNew = true;
+            bool bDownNew = bOver;
+            bDownChanged = (bDown != bDownNew);
+            if(bDownChanged) {
+                bDown = bDownNew;
             }
+            
+            bPressedInside = bDown && bDownChanged;
             
         } else if(point.type == ButtonPoint::Type::Dragged) {
         
-            if(bOver == false) {
-                bDownNew = false;
+            if(bDown) {
+                bool bDownNew = bOver;
+                bDownChanged = (bDown != bDownNew);
+                if(bDownChanged) {
+                    bDown = bDownNew;
+                }
             }
         
+            bDraggedOutside = !bDown && bDownChanged;
+        
         } else if(point.type == ButtonPoint::Type::Released) {
+
+            bool bDownNew = false;
+            bDownChanged = (bDown != bDownNew);
+            if(bDownChanged) {
+                bDown = bDownNew;
+            }
         
-            bDownNew = false;
-        }
-        
-        bDownChanged = bDown != bDownNew;
-        if(bDownChanged) {
-            bDown = bDownNew;
+            bReleasedInside = !bDown && bDownChanged && bOver;
+            bReleasedOutside = !bDown && bDownChanged && !bOver;
         }
         
         pointPos = point.pos; // save last point position.
@@ -191,27 +216,27 @@ bool Button::downChanged() const {
 
 //--------------------------------------------------------------
 bool Button::movedInside() {
-    return (over() && overChanged());
+    return bMovedInside;
 }
 
 bool Button::movedOutside() {
-    return (!over() && overChanged());
+    return bMovedOutside;
 }
 
 bool Button::pressedInside() {
-    return (down() && downChanged());
+    return bPressedInside;
 }
 
 bool Button::draggedOutside() {
-    return (!down() && downChanged() && !over() && overChanged());
+    return bDraggedOutside;
 }
 
 bool Button::releasedInside() {
-    return (!down() && downChanged() && over());
+    return bReleasedInside;
 }
 
 bool Button::releasedOutside() {
-    return (!down() && downChanged() && !over());
+    return bReleasedOutside;
 }
 
 //--------------------------------------------------------------
