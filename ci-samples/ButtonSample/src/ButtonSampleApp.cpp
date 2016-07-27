@@ -1,6 +1,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Utilities.h"
 
 #include "ciButton.h"
 
@@ -20,7 +21,12 @@ class ButtonSampleApp : public App {
 	void mouseUp( MouseEvent event ) override;
     void keyDown( KeyEvent event ) override;
     
+    void addButtonEvent(std::string event);
+    void addMouseEvent(std::string eventType, MouseEvent event);
+    
     coc::ciButton button;
+    std::vector<std::string> buttonEvents;
+    std::vector<std::string> mouseEvents;
 };
 
 void ButtonSampleApp::setup() {
@@ -44,19 +50,19 @@ void ButtonSampleApp::update() {
     // below are button states which can be used to do different things.
     
     if(button.movedInside()) {
-        cout << "movedInside" << endl;
+        addButtonEvent("movedInside");
     }
     if(button.movedOutside()) {
-        cout << "movedOutside" << endl;
+        addButtonEvent("movedOutside");
     }
     if(button.pressedInside()) {
-        cout << "pressedInside" << endl;
+        addButtonEvent("pressedInside");
     }
     if(button.releasedInside()) {
-        cout << "releasedInside" << endl;
+        addButtonEvent("releasedInside");
     }
     if(button.releasedOutside()) {
-        cout << "releasedOutside" << endl;
+        addButtonEvent("releasedOutside");
     }
 }
 
@@ -77,27 +83,38 @@ void ButtonSampleApp::draw() {
     gl::drawStrokedRect(button.getRect());
     
     gl::color(ColorA(1, 1, 1, 1));
+    
+    for(int i=0; i<buttonEvents.size(); i++) {
+        gl::drawString(buttonEvents[i], vec2(getWindowWidth() - 140, 10 + i * 14));
+    }
+    for(int i=0; i<mouseEvents.size(); i++) {
+        gl::drawString(mouseEvents[i], vec2(5, 10 + i * 14));
+    }
 }
 
 void ButtonSampleApp::mouseMove( MouseEvent event ) {
+    addMouseEvent("mouseMove", event);
     button.pointMoved(event.getX(), event.getY());
 }
 
 void ButtonSampleApp::mouseDown( MouseEvent event ) {
+    addMouseEvent("mouseDown", event);
     button.pointPressed(event.getX(), event.getY());
 }
 
 void ButtonSampleApp::mouseDrag( MouseEvent event ) {
+    addMouseEvent("mouseDrag", event);
     button.pointDragged(event.getX(), event.getY());
 }
 
 void ButtonSampleApp::mouseUp( MouseEvent event ) {
+    addMouseEvent("mouseUp", event);
     button.pointReleased(event.getX(), event.getY());
 }
 
 void ButtonSampleApp::keyDown( KeyEvent event ) {
 
-    // here are some other controlled user cases.
+    // here are some other user cases.
     // where sometimes multiple events come through on the same frame,
     // or when win10 touch events don't fire when they should.
 
@@ -113,6 +130,28 @@ void ButtonSampleApp::keyDown( KeyEvent event ) {
         button.pointPressed(cx, cy);
         button.pointDragged(cx, cy);
         button.pointReleased(cx, cy);
+    }
+}
+
+void ButtonSampleApp::addButtonEvent(std::string event) {
+    std::string str = toString(getElapsedFrames()) + ": " + event;
+    buttonEvents.push_back(str);
+    
+    int maxNum = 30;
+    if(buttonEvents.size() > maxNum) {
+        int numToRemove = buttonEvents.size() - maxNum;
+        buttonEvents.erase(buttonEvents.begin(), buttonEvents.begin() + numToRemove);
+    }
+}
+
+void ButtonSampleApp::addMouseEvent(std::string eventType, MouseEvent event) {
+    std::string str = toString(getElapsedFrames()) + ": " + eventType + " x=" + toString(event.getX()) + " y= " + toString(event.getY());
+    mouseEvents.push_back(str);
+    
+    int maxNum = 30;
+    if(mouseEvents.size() > maxNum) {
+        int numToRemove = mouseEvents.size() - maxNum;
+        mouseEvents.erase(mouseEvents.begin(), mouseEvents.begin() + numToRemove);
     }
 }
 
