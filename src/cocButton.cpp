@@ -25,6 +25,7 @@ Button::Button(coc::Rect rectNew) {
 
     rect = rectNew;
     bEnabled = true;
+    bEnabledChanged = false;
     bUseHandlers = false;
     bUpdateAsync = false;
     bRegisterEvents = false;
@@ -68,6 +69,7 @@ const coc::Rect & Button::getRect() const {
 
 //--------------------------------------------------------------
 void Button::setEnabled(bool value) {
+    bEnabledChanged = bEnabled != value;
     bEnabled = value;
 }
 
@@ -109,6 +111,26 @@ const glm::ivec2 & Button::getPointPosLast() {
 }
 
 //--------------------------------------------------------------
+void Button::reset() {
+
+    bOver = false;
+    bOverChanged = false;
+    bDown = false;
+    bDownChanged = false;
+    
+    bMovedInside = false;
+    bMovedOutside = false;
+    bPressedInside = false;
+    bPressedOutside = false;
+    bDraggedInside = false;
+    bDraggedOutside = false;
+    bReleasedInside = false;
+    bReleasedOutside = false;
+    
+    points.clear();
+}
+
+//--------------------------------------------------------------
 void Button::update() {
 
     bOverChanged = false;
@@ -122,6 +144,18 @@ void Button::update() {
     bDraggedOutside = false;
     bReleasedInside = false;
     bReleasedOutside = false;
+    
+    //----------------------------------------------------------
+    // when disabling the button,
+    // it must be reset so all state information is cleared.
+    
+    bool bDisable = true;
+    bDisable = bDisable && bEnabledChanged;
+    bDisable = bDisable && !bEnabled;
+    if(bDisable) {
+        reset();
+    }
+    bEnabledChanged = false;
 
     //----------------------------------------------------------
     for(int i=0; i<points.size(); i++) {

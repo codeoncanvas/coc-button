@@ -44,7 +44,7 @@ public:
 
     Button(coc::Rect rect = coc::Rect());
     ~Button();
-
+    
     void setRect(coc::Rect rect);
     void setRect(float x, float y, float w, float h);
     const coc::Rect & getRect() const;
@@ -59,6 +59,8 @@ public:
 
     const glm::ivec2 & getPointPosLast();
 
+    void reset();
+    
     void update();
 
     bool over() const;
@@ -96,6 +98,7 @@ protected:
 
     coc::Rect rect;
     bool bEnabled;
+    bool bEnabledChanged;
     bool bUseHandlers;
     bool bUpdateAsync;
     bool bRegisterEvents;
