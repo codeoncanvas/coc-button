@@ -34,7 +34,7 @@ public:
 	void setTexture( ci::gl::TextureRef _tex );
 	ci::gl::TextureRef getTexture() { return tex; }
 
-	void draw() override;
+	void draw() const override;
 
 
 protected:

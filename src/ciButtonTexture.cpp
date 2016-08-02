@@ -32,7 +32,7 @@ void ciButtonTexture::setTexture( ci::gl::TextureRef _tex )
 	tex = _tex;
 }
 
-void ciButtonTexture::draw()
+void ciButtonTexture::draw() const
 {
 	if (tex) {
 		gl::draw( tex, rect );

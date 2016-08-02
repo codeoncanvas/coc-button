@@ -35,7 +35,7 @@ ciButton::ciButton(coc::Rect rect) : coc::Button(rect) {
 }
 
 //--------------------------------------------------------------
-void ciButton::draw() {
+void ciButton::draw() const {
     gl::drawSolidRect( rect );
 }
 
