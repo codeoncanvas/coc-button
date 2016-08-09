@@ -106,7 +106,7 @@ void Button::moveCenterTo( int x, int y ) {
 }
 
 //--------------------------------------------------------------
-const glm::ivec2 & Button::getPointPosLast() {
+const glm::ivec2 & Button::getPointPosLast() const {
     return pointPos;
 }
 
@@ -269,35 +269,35 @@ bool Button::downChanged() const {
 }
 
 //--------------------------------------------------------------
-bool Button::movedInside() {
+bool Button::movedInside() const {
     return bMovedInside;
 }
 
-bool Button::movedOutside() {
+bool Button::movedOutside() const {
     return bMovedOutside;
 }
 
-bool Button::pressedInside() {
+bool Button::pressedInside() const {
     return bPressedInside;
 }
 
-bool Button::pressedOutside() {
+bool Button::pressedOutside() const {
     return bPressedOutside;
 }
 
-bool Button::draggedInside() {
+bool Button::draggedInside() const {
     return bDraggedInside;
 }
 
-bool Button::draggedOutside() {
+bool Button::draggedOutside() const {
     return bDraggedOutside;
 }
 
-bool Button::releasedInside() {
+bool Button::releasedInside() const {
     return bReleasedInside;
 }
 
-bool Button::releasedOutside() {
+bool Button::releasedOutside() const {
     return bReleasedOutside;
 }
 

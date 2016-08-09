@@ -57,7 +57,7 @@ public:
 	void moveTo( int x, int y);
 	void moveCenterTo( int x, int y);
 
-    const glm::ivec2 & getPointPosLast();
+    const glm::ivec2 & getPointPosLast() const;
 
     void reset();
     
@@ -68,14 +68,14 @@ public:
     bool down() const;
     bool downChanged() const;
 
-    bool movedInside();
-    bool movedOutside();
-    bool pressedInside();
-    bool pressedOutside();
-    bool draggedInside();
-    bool draggedOutside();
-    bool releasedInside();
-    bool releasedOutside();
+    bool movedInside() const;
+    bool movedOutside() const;
+    bool pressedInside() const;
+    bool pressedOutside() const;
+    bool draggedInside() const;
+    bool draggedOutside() const;
+    bool releasedInside() const;
+    bool releasedOutside() const;
 
 	void pointMoved(int x, int y);
     void pointPressed(int x, int y);
