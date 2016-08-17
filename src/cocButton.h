@@ -27,11 +27,17 @@ namespace coc {
 struct ButtonPoint {
 
     enum Type {
-        Moved = 0,
+        Undefined = 0,
+        Moved,
         Pressed,
         Dragged,
         Released
     };
+    
+    ButtonPoint(Type type=Undefined, glm::ivec2 pos=glm::ivec2()) {
+        this->type = type;
+        this->pos = pos;
+    }
 
     Type type;
     glm::ivec2 pos;
