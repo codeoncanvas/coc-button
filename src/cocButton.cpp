@@ -50,6 +50,12 @@ Button::~Button() {
 }
 
 //--------------------------------------------------------------
+ButtonRef Button::create(const coc::Rect & rect) {
+    ButtonRef button(new Button(rect));
+    return button;
+}
+
+//--------------------------------------------------------------
 void Button::setRect(coc::Rect value) {
     rect = value;
 }

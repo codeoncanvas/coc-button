@@ -27,11 +27,16 @@
 
 namespace coc {
 
+class ciButton;
+typedef std::shared_ptr<ciButton> ciButtonRef;
+
 class ciButton : public coc::Button {
 
 public:
 
     ciButton(coc::Rect rect = coc::Rect());
+    
+    static ciButtonRef create(const coc::Rect & rect);
 
     void mouseMoved(ci::app::MouseEvent & mouse);
     void mousePressed(ci::app::MouseEvent & mouse);

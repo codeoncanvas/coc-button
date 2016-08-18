@@ -44,12 +44,17 @@ struct ButtonPoint {
 };
 
 //--------------------------------------------------------------
+class Button;
+typedef std::shared_ptr<Button> ButtonRef;
+
 class Button {
 
 public:
 
     Button(coc::Rect rect = coc::Rect());
     ~Button();
+    
+    static ButtonRef create(const coc::Rect & rect);
     
     void setRect(coc::Rect rect);
     void setRect(float x, float y, float w, float h);
