@@ -39,6 +39,18 @@ void ciButton::draw() const {
     gl::drawSolidRect( rect );
 }
 
+void ciButton::drawDebug() const {
+    ci::gl::color(1.0, 0.0, 0.0);
+    if(over()) {
+        ci::gl::color(0.0, 1.0, 0.0);
+    }
+    if(down()) {
+        ci::gl::color(0.0, 0.0, 1.0);
+    }
+    ci::gl::drawStrokedRect( rect );
+    ci::gl::color(1.0, 1.0, 1.0);
+}
+
 //--------------------------------------------------------------
 void ciButton::mouseMoved(ci::app::MouseEvent & mouse) {
     coc::Button::pointMoved(mouse.getX(), mouse.getY());

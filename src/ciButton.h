@@ -39,6 +39,7 @@ public:
     void mouseReleased(ci::app::MouseEvent & mouse);
 
 	virtual void draw() const;
+    virtual void drawDebug() const;
 
     virtual void handleMovedInside();
     virtual void handleMovedOutside();
