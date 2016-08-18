@@ -54,7 +54,7 @@ public:
     Button(coc::Rect rect = coc::Rect());
     ~Button();
     
-    static ButtonRef create(const coc::Rect & rect);
+    static ButtonRef create(const coc::Rect & rect = coc::Rect());
     
     void setRect(coc::Rect rect);
     void setRect(float x, float y, float w, float h);
@@ -73,6 +73,9 @@ public:
     void reset();
     
     void update();
+    
+	virtual void draw() const {}
+    virtual void drawDebug() const {}
 
     bool over() const;
     bool overChanged() const;

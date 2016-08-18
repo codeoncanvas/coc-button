@@ -36,25 +36,25 @@ public:
 
     ciButton(coc::Rect rect = coc::Rect());
     
-    static ciButtonRef create(const coc::Rect & rect);
+    static ciButtonRef create(const coc::Rect & rect = coc::Rect());
 
     void mouseMoved(ci::app::MouseEvent & mouse);
     void mousePressed(ci::app::MouseEvent & mouse);
     void mouseDragged(ci::app::MouseEvent & mouse);
     void mouseReleased(ci::app::MouseEvent & mouse);
 
-	virtual void draw() const;
-    virtual void drawDebug() const;
+	virtual void draw() const override;
+    virtual void drawDebug() const override;
 
-    virtual void handleMovedInside();
-    virtual void handleMovedOutside();
-    virtual void handlePressedInside();
-    virtual void handleDraggedOutside();
-    virtual void handleReleasedInside();
-    virtual void handleReleasedOutside();
+    virtual void handleMovedInside() override;
+    virtual void handleMovedOutside() override;
+    virtual void handlePressedInside() override;
+    virtual void handleDraggedOutside() override;
+    virtual void handleReleasedInside() override;
+    virtual void handleReleasedOutside() override;
 
-    virtual void handleEventRegister();
-    virtual void handleEventUnregister();
+    virtual void handleEventRegister() override;
+    virtual void handleEventUnregister() override;
 
 	ci::signals::Signal<void()>& getSignalOnMovedInside() 	{ return signalOnMovedInside; }
 	ci::signals::Signal<void()>& getSignalOnMovedOutside() 	{ return signalOnMovedOutside; }
