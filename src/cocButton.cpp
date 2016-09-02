@@ -152,13 +152,12 @@ void Button::update() {
     bReleasedOutside = false;
     
     //----------------------------------------------------------
-    // when disabling the button,
+    // when enabling / disabling the button,
     // it must be reset so all state information is cleared.
     
-    bool bDisable = true;
-    bDisable = bDisable && bEnabledChanged;
-    bDisable = bDisable && !bEnabled;
-    if(bDisable) {
+    bool bReset = false;
+    bReset = bReset || bEnabledChanged;
+    if(bReset) {
         reset();
     }
     bEnabledChanged = false;
